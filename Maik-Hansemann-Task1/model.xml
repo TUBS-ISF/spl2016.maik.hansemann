@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel>
+		<properties/>
+		<struct>
+			<and abstract="true" mandatory="true" name="Product">
+				<description>
+					Abstraktes Featur als Wurzel-Element für das Produkt einer einfachen Bildverarbeitungsprogramms 
+				</description>
+				<alt abstract="true" mandatory="true" name="GUI">
+					<description>
+						Abstraktes Feature zur Auswahl von GUIs
+					</description>
+					<feature mandatory="true" name="QT">
+						<description>
+							Verwendung der grafischer Benutzeroberfläche Qt für die Darstellung des Fensters und Bilder.
+						</description>
+					</feature>
+					<feature mandatory="true" name="GTK">
+						<description>
+							Verwendung der grafischer Benutzeroberfläche GTK für die Darstellung des Fensters und Bilder.
+						</description>
+					</feature>
+					<feature mandatory="true" name="Swing">
+						<description>
+							Verwendung der grafischer Benutzeroberfläche Swing für die Darstellung des Fensters und Bilder.
+						</description>
+					</feature>
+				</alt>
+				<and abstract="true" mandatory="true" name="Transformation">
+					<description>
+						Abstraktes Feature für allgemeine Transformation für Bilder.
+					</description>
+					<feature name="2D-FFT">
+						<description>
+							Fourier-Transformation für Bilder mittels Fast-Fourier-Transformation.
+						</description>
+					</feature>
+					<feature mandatory="true" name="Image Rotation">
+						<description>
+							Rotation des Bildes
+						</description>
+					</feature>
+					<feature mandatory="true" name="Image Scaling">
+						<description>
+							Skallierung des Bildes
+						</description>
+					</feature>
+					<feature mandatory="true" name="Image Translation">
+						<description>
+							Verschiebung des Bildes
+						</description>
+					</feature>
+					<feature name="2D-IFFT">
+						<description>
+							Iverse Fourier-Transformation des Bildes mittels Fast-Fourier-Transformation
+						</description>
+					</feature>
+				</and>
+				<and abstract="true" mandatory="true" name="Base">
+					<description>
+						
+					</description>
+					<feature mandatory="true" name="Show Image">
+						<description>
+							Anzeigen des Bildes im Fenster
+						</description>
+					</feature>
+					<feature mandatory="true" name="Load Image">
+						<description>
+							Laden des Bildes
+						</description>
+					</feature>
+					<feature mandatory="true" name="Save Image">
+						<description>
+							SPeichern des veränderten Bildes
+						</description>
+					</feature>
+					<feature name="Calculate Grayscale">
+						<description>
+							Berechnung eienes rauwertbildes aus eien Farbbild
+						</description>
+					</feature>
+				</and>
+				<or abstract="true" name="Filter">
+					<description>
+						Abstrakes Feature für die Verwendung von Filtern.
+						Hier lineare und nichtlineare Filter.
+					</description>
+					<or abstract="true" mandatory="true" name="Convolution Filter">
+						<description>
+							ABstrake Klasse für lineare Filter. DIese können mittels einer Faltung beschrieben werden.
+						</description>
+						<feature mandatory="true" name="Gauss Filter">
+							<description>
+								Dient zur Glättung oder Weichzeichnen des Bildinhaltes
+							</description>
+						</feature>
+						<feature mandatory="true" name="Sobel Filter">
+							<description>
+								Dient zur Kantendetektion bei Bildinhalten
+							</description>
+						</feature>
+					</or>
+					<or abstract="true" mandatory="true" name="Nonlinear Filter">
+						<description>
+							Abstraktes Feature für Rangordnungsfilter
+						</description>
+						<feature mandatory="true" name="Median Filter">
+							<description>
+								Ausfürhung des Medianfilter auf Bildinhalte
+							</description>
+						</feature>
+						<feature mandatory="true" name="Maximum Filter">
+							<description>
+								Ausfürhung des MaximumfIlters auf Bildinhalte
+							</description>
+						</feature>
+						<feature mandatory="true" name="Minimum Filter">
+							<description>
+								Ausfürhung des Minimumfilters auf Bildinhalte
+							</description>
+						</feature>
+					</or>
+				</or>
+				<or abstract="true" name="Interpolation">
+					<description>
+						Abstraktes Feature für Interpolation von Bildinhalten.
+					</description>
+					<feature mandatory="true" name="Bilinear interpolation">
+						<description>
+							Bilineare interpolation ist eine Erweiterung der linearen Interpolation.
+						</description>
+					</feature>
+					<feature mandatory="true" name="Bicubic interpolation">
+						<description>
+							Bikubische interpolation ist eine Erweiterung der kubischen Interpolation für in einer zweidimensionalen Raster Datenpunkten,
+						</description>
+					</feature>
+					<feature mandatory="true" name="Nearest Neighbour Interpolation">
+						<description>
+							Ausfürhung von Nearest-neighbor für interpolation
+						</description>
+					</feature>
+				</or>
+			</and>
+		</struct>
+		<constraints>
+			<rule>
+				<imp>
+					<var>Filter</var>
+					<var>Calculate Grayscale</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Image Rotation</var>
+					<var>Interpolation</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>Image Scaling</var>
+					<var>Interpolation</var>
+				</imp>
+			</rule>
+		</constraints>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>
